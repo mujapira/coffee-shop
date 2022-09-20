@@ -1,13 +1,15 @@
 import { Header } from "../../components/Header";
 import { CoffeeList } from "./components/CoffeeList";
 import { Intro } from "./components/Intro";
+import BackgroundImage from "../../assets/Background.svg";
+import { HomeContainer } from "./styles";
 
 export function Home() {
   return (
-    <div>
+    <HomeContainer style={{ backgroundImage: `url(${BackgroundImage})` }}>
       <Header />
       <Intro />
       <CoffeeList />
-    </div>
+    </HomeContainer>
   );
 }

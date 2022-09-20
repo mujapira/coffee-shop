@@ -32,5 +32,7 @@ export const LocationContainer = styled.div`
   }
 
   span {
+    font-size: 0.875rem;
+    line-height: 130%;
   }
 `;
