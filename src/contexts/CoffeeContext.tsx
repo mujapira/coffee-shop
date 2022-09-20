@@ -12,6 +12,7 @@ interface Coffee {
   description: string;
   tags: string[];
   price: number;
+  image: string;
 }
 
 interface CoffeeContextType {

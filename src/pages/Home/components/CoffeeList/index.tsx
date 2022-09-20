@@ -10,14 +10,15 @@ export function CoffeeListComponent() {
     <CoffeeListContainer>
       <h1>Nossos cafés</h1>
       <ListContainer>
-        {coffeContext.coffeeList.map((coffe) => {
+        {coffeContext.coffeeList.map((coffee) => {
           return (
             <Coffee
-              key={coffe.id}
-              title={coffe.title}
-              description={coffe.description}
-              tags={coffe.tags}
-              price={coffe.price}
+              key={coffee.id}
+              title={coffee.title}
+              description={coffee.description}
+              tags={coffee.tags}
+              price={coffee.price}
+              image={coffee.image}
             />
           );
         })}

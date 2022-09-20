@@ -7,6 +7,10 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 1440px) {
+    padding: 10px 16px;
+  }
 `;
 
 export const InfoContainer = styled.div`
