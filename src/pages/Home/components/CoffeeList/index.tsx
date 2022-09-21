@@ -4,13 +4,13 @@ import { Coffee } from "./Coffee";
 import { CoffeeListContainer, ListContainer } from "./styles";
 
 export function CoffeeListComponent() {
-  const coffeContext = useContext(CoffeeContext);
+  const { coffeeList } = useContext(CoffeeContext);
 
   return (
     <CoffeeListContainer>
       <h1>Nossos cafés</h1>
       <ListContainer>
-        {coffeContext.coffeeList.map((coffee) => {
+        {coffeeList.map((coffee) => {
           return (
             <Coffee
               key={coffee.id}
@@ -19,6 +19,7 @@ export function CoffeeListComponent() {
               tags={coffee.tags}
               price={coffee.price}
               image={coffee.image}
+              id={coffee.id}
             />
           );
         })}

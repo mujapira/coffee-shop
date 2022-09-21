@@ -1,9 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../lib/axios";
 
 interface Coffee {
@@ -18,6 +13,9 @@ interface Coffee {
 interface CoffeeContextType {
   coffeeList: Coffee[];
   fetchCoffees: (query?: string) => Promise<void>;
+
+  cartItems: Coffee[];
+  setCartItems: React.Dispatch<React.SetStateAction<Coffee[]>>;
 }
 
 interface CoffeeProviderProps {
@@ -31,6 +29,8 @@ export const CoffeeContext = createContext<CoffeeContextType>(
 export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
 
+  const [cartItems, setCartItems] = useState<Coffee[]>([]);
+
   async function fetchCoffees(query?: string) {
     const response = await api.get("/products", {
       params: {
@@ -42,6 +42,10 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
     setCoffeeList(response.data);
   }
 
+  console.log(cartItems);
+
+  useEffect(() => {}, [cartItems]);
+
   useEffect(() => {
     fetchCoffees();
   }, []);
@@ -51,6 +55,8 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
       value={{
         coffeeList,
         fetchCoffees,
+        cartItems,
+        setCartItems,
       }}
     >
       {children}

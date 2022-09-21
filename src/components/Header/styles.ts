@@ -1,12 +1,24 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.header`
+export const Background = styled.header`
+  width: 100%;
+  background: ${(props) => props.theme["background"]};
+  padding: 0px 160px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+`;
+
+export const HeaderContainer = styled.div`
   max-width: 1440px;
   padding: 32px 160px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 
   @media screen and (max-width: 1440px) {
     padding: 10px 16px;
