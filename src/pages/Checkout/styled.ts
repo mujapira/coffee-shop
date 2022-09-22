@@ -1,1 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+
+export const CheckoutContainer = styled.div`
+  margin-top: 104px;
+`;

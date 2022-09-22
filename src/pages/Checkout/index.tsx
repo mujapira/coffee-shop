@@ -1,7 +1,12 @@
+import { Header } from "../../components/Header";
+import { OrderInfo } from "./components/OrderInfo";
+import { CheckoutContainer } from "./styled";
+
 export function Checkout() {
   return (
-    <>
-      <div>Hello World!</div>
-    </>
+    <CheckoutContainer>
+      <Header />
+      <OrderInfo />
+    </CheckoutContainer>
   );
 }
