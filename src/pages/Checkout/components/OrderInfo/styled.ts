@@ -130,7 +130,8 @@ export const FlagsContainer = styled.section`
     border-radius: 6px;
     background: ${(props) => props.theme["base-button"]};
     flex: 1;
-
+    cursor: pointer;
+    
     svg {
       color: ${(props) => props.theme["purple"]};
     }

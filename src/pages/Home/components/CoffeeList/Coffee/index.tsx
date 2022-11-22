@@ -1,5 +1,5 @@
 import { ShoppingCart } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Minus from "../../../../../assets/minus.svg";
 import Plus from "../../../../../assets/plus.svg";
@@ -22,7 +22,20 @@ interface Coffee {
 }
 
 export function Coffee({ ...props }: Coffee) {
-  const { cartItems, setCartItems, addItem } = useContext(CoffeeContext);
+  const { cartItems, addItem, removeItem } = useContext(CoffeeContext);
+  const [counter, setCounter] = useState(0);
+
+  function countCartCoffee() {
+    const filteredCoffee = cartItems.filter(
+      (item) => item.coffee.id === props.id
+    );
+    console.log(`filtered: ${filteredCoffee.length}`);
+    setCounter(filteredCoffee.length);
+  }
+
+  useEffect(() => {
+    countCartCoffee();
+  }, [cartItems]);
 
   return (
     <CoffeeCard>
@@ -44,10 +57,10 @@ export function Coffee({ ...props }: Coffee) {
 
         <ButtonsContainer>
           <CounterContainer>
-            <span>
+            <span onClick={() => removeItem(props.id)!}>
               <img src={Minus} alt="" />
             </span>
-            <span>0</span>
+            <span>{counter}</span>
             <span onClick={() => addItem(props)!}>
               <img src={Plus} alt="" />
             </span>

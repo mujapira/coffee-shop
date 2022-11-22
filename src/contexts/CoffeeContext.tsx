@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { api } from "../lib/axios";
 
 interface Coffee {
@@ -9,13 +15,16 @@ interface Coffee {
   price: number;
   image: string;
 }
-
+interface CartCoffee {
+  coffee: Coffee;
+}
 interface CoffeeContextType {
   coffeeList: Coffee[];
   fetchCoffees: (query?: string) => Promise<void>;
-  cartItems: Coffee[];
-  setCartItems: React.Dispatch<React.SetStateAction<Coffee[]>>;
+  cartItems: CartCoffee[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartCoffee[]>>;
   addItem: (object: Coffee) => void;
+  removeItem: (id: number) => void;
 }
 
 interface CoffeeProviderProps {
@@ -28,8 +37,7 @@ export const CoffeeContext = createContext<CoffeeContextType>(
 
 export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
-
-  const [cartItems, setCartItems] = useState<Coffee[]>([]);
+  const [cartItems, setCartItems] = useState<CartCoffee[]>([]);
 
   async function fetchCoffees(query?: string) {
     const response = await api.get("/products", {
@@ -40,37 +48,60 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
       },
     });
     setCoffeeList(response.data);
+
+    // console.log('fetching coffees')
+    // console.log(response.data)
+    // console.log('fetching coffees done')
   }
 
-  function fetchCart() {
-    const storageStateAsJSON = localStorage.getItem(
-      "@ignite-coffee-shop:cart-state-1.0.0"
-    );
+  async function fetchCart(query?: string) {
+    const response = await api.get("/cart", {
+      params: {
+        _sort: "number",
+        _order: "asc",
+        q: query,
+      },
+    });
+    setCartItems(response.data);
 
-    if (storageStateAsJSON != null) {
-      setCartItems(JSON.parse(storageStateAsJSON!));
-    }
+    // console.log('fetching cart')
+    // console.log(response.data)
+    // console.log('fetching cart done')
   }
 
-  function addItem(object: Coffee) {
-    const oldCart = [...cartItems];
-    const newCart = [...oldCart, object];
-    const stateJSON = JSON.stringify(newCart);
+  const addItem = useCallback(async (data: Coffee) => {
+    const response = await api.post("/cart", {
+      coffee: data,
+    });
 
-    localStorage.setItem("@ignite-coffee-shop:cart-state-1.0.0", stateJSON);
+    const item = response.data;
+    
+    setCartItems(cartItems => [...cartItems, item]);
+  }, []);
 
-    setCartItems(newCart);
-  }
+  const removeItem = useCallback(async (id: number) => {
+    const cartWithoutDeletedOne = cartItems.filter((cartItem) => {
+      return cartItem.coffee.id !== id;
+    });
 
-  useEffect(() => {}, [cartItems]);
+    const response = await api.delete(`/cart/${id}`);
+    setCartItems(cartWithoutDeletedOne);
+    // console.log('removing item')
+
+  }, []);
+
+
+  useEffect(() => {
+    // console.log('useEffect cartItems')
+  }, [cartItems]);
 
   useEffect(() => {
     fetchCoffees();
     fetchCart();
-  }, []);
 
-  console.log(localStorage.getItem("@ignite-coffee-shop:cart-state-1.0.0"));
-  console.log(cartItems);
+    // console.log('useEffect fetch')
+  }, []);
+  
   return (
     <CoffeeContext.Provider
       value={{
@@ -79,6 +110,7 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         cartItems,
         setCartItems,
         addItem,
+        removeItem,
       }}
     >
       {children}
