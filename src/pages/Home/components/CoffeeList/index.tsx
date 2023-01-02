@@ -4,24 +4,15 @@ import { Coffee } from "./Coffee";
 import { CoffeeListContainer, ListContainer } from "./styles";
 
 export function CoffeeListComponent() {
-  const { coffeeList } = useContext(CoffeeContext);
+  const { coffeeList, cartItems } = useContext(CoffeeContext);
 
   return (
     <CoffeeListContainer>
       <h1>Nossos cafés</h1>
       <ListContainer>
-        {coffeeList.map((coffee) => {
-          return (
-            <Coffee
-              key={coffee.id}
-              title={coffee.title}
-              description={coffee.description}
-              tags={coffee.tags}
-              price={coffee.price}
-              image={coffee.image}
-              id={coffee.id}
-            />
-          );
+        {coffeeList?.map((coffee) => {
+          const coffeeAtCart = cartItems.find((item) => item.id === coffee.id);
+          return <Coffee key={coffee.id} coffee={coffee} quantity={coffeeAtCart?.quantity!} />;
         })}
       </ListContainer>
     </CoffeeListContainer>

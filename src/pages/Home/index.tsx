@@ -5,6 +5,8 @@ import BackgroundImage from "../../assets/Background.svg";
 import { HomeContainer } from "./styles";
 
 export function Home() {
+
+
   return (
     <HomeContainer style={{ backgroundImage: `url(${BackgroundImage})` }}>
       <Header />
