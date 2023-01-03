@@ -16,7 +16,7 @@ export const ShoppingCartContainer = styled.div`
     background: ${(props) => props.theme["yellow-dark"]};
     color: ${(props) => props.theme["base-white"]};
 
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
 

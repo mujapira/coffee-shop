@@ -21,6 +21,7 @@ interface CoffeeContextType {
   fetchCoffees: (query?: string) => Promise<void>;
   cartItems: CartCoffee[];
   handleItemCart: (id: number, operation: string) => void;
+  cartPrice: number;
 }
 
 interface CoffeeProviderProps {
@@ -32,6 +33,7 @@ export const CoffeeContext = createContext<CoffeeContextType>({} as CoffeeContex
 export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
   const [cartItems, setCartItems] = useState<CartCoffee[]>([]);
+  const [cartPrice, setCartPrice] = useState(0);
 
   async function fetchCoffees(query?: string) {
     const response = await api.get("/products", {
@@ -110,12 +112,19 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         };
         setCartItems([...filteredCart, cartItem]);
       } else {
+        quantity = 0;
         const filteredCart = cartItems.filter((cartItem) => cartItem.id !== newCartItem.id);
-        console.log(`itemToRemove:${filteredCart}`);
-
         setCartItems([...filteredCart]);
       }
     }
+  }
+
+  function getCartTotalPrice() {
+    let value = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      value += cartItems[i].price * cartItems[i].quantity!;
+    }
+    setCartPrice(value);
   }
 
   useEffect(() => {
@@ -127,7 +136,8 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
   useEffect(() => {
     const stateJSON = JSON.stringify(cartItems);
     localStorage.setItem("@ignite:coffee-shop-cart", stateJSON);
-    console.log(`@ignite:coffee-shop-cart: ${localStorage.getItem("@ignite:coffee-shop-cart")}`);
+    getCartTotalPrice();
+    // console.log(`@ignite:coffee-shop-cart: ${localStorage.getItem("@ignite:coffee-shop-cart")}`);
   }, [cartItems]);
 
   return (
@@ -137,6 +147,7 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         fetchCoffees,
         handleItemCart,
         cartItems,
+        cartPrice,
       }}
     >
       {children}

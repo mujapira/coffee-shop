@@ -38,6 +38,7 @@ export function Coffee(props: Props) {
             <span onClick={() => handleItemCart(coffee.id, "minus")}>
               <img src={Minus} alt="" />
             </span>
+
             <span>{quantity ?? 0}</span>
             <span onClick={() => handleItemCart(coffee.id, "plus")}>
               <img src={Plus} alt="" />

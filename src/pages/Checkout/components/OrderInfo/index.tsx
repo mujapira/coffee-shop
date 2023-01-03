@@ -1,27 +1,32 @@
-import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPinLine,
-  Money,
-  Trash,
-} from "phosphor-react";
-import { useContext } from "react";
-import { CoffeeContext } from "../../../../contexts/CoffeeContext";
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money, Trash } from "phosphor-react";
+import { useContext, useState } from "react";
+import { Coffee, CoffeeContext } from "../../../../contexts/CoffeeContext";
 import {
   CardContainer,
   CardWrapper,
   CounterContainer,
   FlagsContainer,
-  LocationContainer,
+  ImageContainer,
+  MiddleContainer,
   OrderInfoContainer,
+  OrderSummary,
   PaymentContainer,
+  Price,
+  PriceContainer,
+  Summary,
+  SummaryItem,
+  Title,
+  Total,
+  TrashButton,
 } from "./styled";
 import Minus from "../../../../assets/minus.svg";
 import Plus from "../../../../assets/plus.svg";
 
 export function OrderInfo() {
-  const { cartItems, addItem } = useContext(CoffeeContext);
+  const { cartItems, handleItemCart, coffeeList, cartPrice } = useContext(CoffeeContext);
+
+  const deliveryTax = 4;
+
   return (
     <OrderInfoContainer>
       <div>
@@ -55,9 +60,7 @@ export function OrderInfo() {
             </div>
             <div>
               <h3>Pagamento</h3>
-              <span>
-                O pagamento é feito na entrega. Escolha a forma que seja pagar
-              </span>
+              <span>O pagamento é feito na entrega. Escolha a forma que seja pagar</span>
             </div>
           </div>
 
@@ -78,39 +81,70 @@ export function OrderInfo() {
         </PaymentContainer>
       </div>
 
-      <LocationContainer>
+      <OrderSummary>
         <h1>Cafés selecionados</h1>
+
         <div>
           {cartItems.map((item) => {
+            const coffee = coffeeList.find((coffee: Coffee) => coffee.id == item.id)!;
+
             return (
               <>
-                <div>
-                  <img src={item.image} alt={item.title} />
-                </div>
-                <div>
-                  <span>{item.title}</span>
-                  <b>R${item.price}</b>
-                </div>
-                <div>
-                  <CounterContainer>
-                    <span>
-                      <img src={Minus} alt="" />
-                    </span>
-                    <span>0</span>
-                    <span onClick={() => addItem(item)!}>
-                      <img src={Plus} alt="" />
-                    </span>
-                  </CounterContainer>
-                  <button>
-                    <Trash />
-                    <span>remover</span>
-                  </button>
-                </div>
+                <SummaryItem>
+                  <ImageContainer>
+                    <img src={coffee.image} alt={coffee.image} />
+                  </ImageContainer>
+                  <MiddleContainer>
+                    <span>{coffee.title}</span>
+                    <div>
+                      <CounterContainer>
+                        {item.quantity === 0 ? (
+                          <span onClick={() => handleItemCart(coffee.id, "minus")}>
+                            <img src={Minus} alt="" />
+                          </span>
+                        ) : (
+                          <span>
+                            <img src={Minus} alt="" />
+                          </span>
+                        )}
+
+                        <span>{item.quantity ?? 0}</span>
+                        <span onClick={() => handleItemCart(coffee.id, "plus")}>
+                          <img src={Plus} alt="" />
+                        </span>
+                      </CounterContainer>
+                      <TrashButton>
+                        <Trash />
+                        <span>REMOVER</span>
+                      </TrashButton>
+                    </div>
+                  </MiddleContainer>
+                  <PriceContainer>
+                    <b>R${coffee.price}</b>
+                  </PriceContainer>
+                </SummaryItem>
+                <span />
               </>
             );
           })}
+          <Summary>
+            <div>
+              <p>
+                <Title>Total de itens</Title>
+                <Price>R$ {cartPrice}</Price>
+              </p>
+              <p>
+                <Title>Entrega</Title>
+                <Price>R$ {deliveryTax}</Price>
+              </p>
+              <Total>
+                <Title>Total</Title>
+                <Price>R$ </Price>
+              </Total>
+            </div>
+          </Summary>
         </div>
-      </LocationContainer>
+      </OrderSummary>
     </OrderInfoContainer>
   );
 }
