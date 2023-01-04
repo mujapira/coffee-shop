@@ -85,7 +85,7 @@
       "title": "Cubano",
       "description": "Drink gelado de café expresso com rum, creme de leite e hortelã",
       "image": ["./public/assets/Type=Cubano.svg"],
-      "tags": ["expecial", "com leite", "alcoólico"],
+      "tags": ["especial", "com leite", "alcoólico"],
       "price": 9.9
     },
     {
@@ -109,7 +109,7 @@
       "title": "Irlândes",
       "description": "Babida à base de café, uísque irlandês, açúcar e chantilly",
       "image": ["./public/assets/Type=Irlandes.svg"],
-      "tags": ["expecial", "alcoólico"],
+      "tags": ["especial", "alcoólico"],
       "price": 9.9
     }
   ]

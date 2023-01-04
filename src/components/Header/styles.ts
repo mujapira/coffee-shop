@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Background = styled.header`
   width: 100%;
   background: ${(props) => props.theme["background"]};
-  padding: 0px 160px;
   position: fixed;
   top: 0;
   left: 0;
