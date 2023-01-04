@@ -29,7 +29,7 @@ export const CoffeeCard = styled.div`
     font-size: 1.25rem;
     font-family: "Baloo 2", cursive;
   }
-  p {
+  > p {
     color: ${(props) => props.theme["base-label"]};
     font-size: 0.875rem;
     padding: 0px 20px;
@@ -84,30 +84,7 @@ export const TagContainer = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
-`;
-
-export const CounterContainer = styled.button`
-  display: flex;
   align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 6px;
-  background-color: ${(props) => props.theme["base-button"]};
-  gap: 10px;
-  padding: 0px 10px;
-
-  > span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${(props) => props.theme["base-title"]};
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: regular;
-    img {
-      width: 14px;
-    }
-  }
 `;
 
 export const AddToCart = styled.button`
@@ -118,8 +95,10 @@ export const AddToCart = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
   padding: 8px;
+  &:hover {
+    background-color: ${(props) => props.theme["purple"]};
+  }
   svg {
     color: ${(props) => props.theme["base-card"]};
   }

@@ -1,10 +1,9 @@
 import { ShoppingCart } from "phosphor-react";
-import { useContext, useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
-import Minus from "../../../../../assets/minus.svg";
-import Plus from "../../../../../assets/plus.svg";
-import { CoffeeContext, Coffee as ICoffee } from "../../../../../contexts/CoffeeContext";
-import { AddToCart, ButtonsContainer, CoffeeCard, CounterContainer, TagContainer } from "./styles";
+import { Counter } from "../../../../../components/Counter";
+import { Coffee as ICoffee } from "../../../../../contexts/CoffeeContext";
+import { AddToCart, ButtonsContainer, CoffeeCard, TagContainer } from "./styles";
 
 type Props = {
   coffee: ICoffee;
@@ -13,8 +12,6 @@ type Props = {
 
 export function Coffee(props: Props) {
   const { coffee, quantity } = props;
-  const { handleItemCart } = useContext(CoffeeContext);
-
   return (
     <CoffeeCard>
       <img src={`${[...coffee.image]}`} alt="" />
@@ -34,17 +31,7 @@ export function Coffee(props: Props) {
         </span>
 
         <ButtonsContainer>
-          <CounterContainer>
-            <span onClick={() => handleItemCart(coffee.id, "minus")}>
-              <img src={Minus} alt="" />
-            </span>
-
-            <span>{quantity ?? 0}</span>
-            <span onClick={() => handleItemCart(coffee.id, "plus")}>
-              <img src={Plus} alt="" />
-            </span>
-          </CounterContainer>
-
+          <Counter coffee={coffee} quantity={quantity} isCheckout={false}/>
           <Link to="/checkout">
             <AddToCart>
               <ShoppingCart size={22} weight={"fill"} />

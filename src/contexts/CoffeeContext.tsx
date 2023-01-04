@@ -102,7 +102,13 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         quantity: quantity,
       };
       setCartItems([...filteredCart, cartItem]);
-    } else {
+    }
+    if (operation === "remove") {
+      quantity = 0;
+      const filteredCart = cartItems.filter((cartItem) => cartItem.id !== newCartItem.id);
+      setCartItems([...filteredCart]);
+    }
+    if (operation === "minus") {
       if (quantity > 1) {
         quantity--;
         const cartItem: CartCoffee = {
@@ -111,10 +117,6 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
           quantity: quantity,
         };
         setCartItems([...filteredCart, cartItem]);
-      } else {
-        quantity = 0;
-        const filteredCart = cartItems.filter((cartItem) => cartItem.id !== newCartItem.id);
-        setCartItems([...filteredCart]);
       }
     }
   }
@@ -124,7 +126,6 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
     for (let i = 0; i < cartItems.length; i++) {
       value += cartItems[i].price * cartItems[i].quantity!;
     }
-    value.toFixed(2)
     setCartPrice(value);
   }
 

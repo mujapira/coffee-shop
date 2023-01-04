@@ -226,58 +226,8 @@ export const PriceContainer = styled.div`
   height: 100%;
 `;
 
-export const CounterContainer = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 6px;
-  background-color: ${(props) => props.theme["base-button"]};
-  gap: 10px;
-  padding: 8px;
 
-  > span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${(props) => props.theme["base-title"]};
-    cursor: pointer;
 
-    img {
-      width: 14px;
-    }
-  }
-`;
-
-export const TrashButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 6px;
-  background-color: ${(props) => props.theme["base-button"]};
-  gap: 10px;
-  padding: 8px;
-  transition: 0.3s;
-  font-size: 0.875rem;
-
-  &:hover {
-    background-color: ${(props) => props.theme["base-hover"]};
-    transition: 0.3s;
-  }
-  > span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${(props) => props.theme["base-text"]};
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 400;
-  }
-  svg {
-    color: ${(props) => props.theme["purple"]};
-  }
-`;
 
 export const Summary = styled.div`
   div {

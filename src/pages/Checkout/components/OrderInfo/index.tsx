@@ -4,7 +4,6 @@ import { Coffee, CoffeeContext } from "../../../../contexts/CoffeeContext";
 import {
   CardContainer,
   CardWrapper,
-  CounterContainer,
   FlagsContainer,
   FormContainer,
   ImageContainer,
@@ -19,21 +18,11 @@ import {
   SummaryItem,
   Title,
   Total,
-  TrashButton,
 } from "./styled";
-import Minus from "../../../../assets/minus.svg";
-import Plus from "../../../../assets/plus.svg";
+import { Counter } from "../../../../components/Counter";
 
-interface Address {
-  cep: number;
-  city: string;
-  district: string;
-  street: string;
-  number: number;
-  aditional?: string;
-}
 export function OrderInfo() {
-  const { cartItems, handleItemCart, coffeeList, cartPrice } = useContext(CoffeeContext);
+  const { cartItems, coffeeList, cartPrice } = useContext(CoffeeContext);
   const deliveryTax = 4;
 
   return (
@@ -106,19 +95,7 @@ export function OrderInfo() {
                   <MiddleContainer>
                     <span>{coffee.title}</span>
                     <div>
-                      <CounterContainer>
-                        <span onClick={() => handleItemCart(coffee.id, "minus")}>
-                          <img src={Minus} alt="" />
-                        </span>
-                        <span>{item.quantity ?? 0}</span>
-                        <span onClick={() => handleItemCart(coffee.id, "plus")}>
-                          <img src={Plus} alt="" />
-                        </span>
-                      </CounterContainer>
-                      <TrashButton>
-                        <Trash />
-                        <span>REMOVER</span>
-                      </TrashButton>
+                      <Counter coffee={coffee} quantity={item.quantity ?? 0} isCheckout={true} />
                     </div>
                   </MiddleContainer>
                   <PriceContainer>
@@ -133,15 +110,15 @@ export function OrderInfo() {
             <div>
               <p>
                 <Title>Total de itens</Title>
-                <Price>R$ {cartPrice}</Price>
+                <Price>R$ {cartPrice.toFixed(2)}</Price>
               </p>
               <p>
                 <Title>Entrega</Title>
-                <Price>R$ {deliveryTax}</Price>
+                <Price>R$ {deliveryTax.toFixed(2)}</Price>
               </p>
               <Total>
                 <Title>Total</Title>
-                <Price>R$ {cartPrice + deliveryTax}</Price>
+                <Price>R$ {(cartPrice + deliveryTax).toFixed(2)}</Price>
               </Total>
             </div>
           </Summary>
