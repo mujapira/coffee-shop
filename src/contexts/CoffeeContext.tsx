@@ -101,7 +101,8 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         price: newCartItem.price,
         quantity: quantity,
       };
-      setCartItems([...filteredCart, cartItem]);
+
+      setCartItems([...filteredCart, cartItem].sort((a, b) => a.id - b.id));
     }
     if (operation === "remove") {
       quantity = 0;
@@ -116,7 +117,7 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
           price: newCartItem.price,
           quantity: quantity,
         };
-        setCartItems([...filteredCart, cartItem]);
+        setCartItems([...filteredCart, cartItem].sort((a, b) => a.id - b.id));
       }
     }
   }
@@ -137,6 +138,7 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
   }, []);
 
   useEffect(() => {
+    cartItems.sort((a, b) => a.id - b.id);
     const stateJSON = JSON.stringify(cartItems);
     localStorage.setItem("@ignite:coffee-shop-cart", stateJSON);
     getCartTotalPrice();
