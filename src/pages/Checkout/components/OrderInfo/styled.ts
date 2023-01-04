@@ -64,10 +64,22 @@ export const CardContainer = styled.div`
       }
     }
   }
+`;
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
-  form {
-    display: flex;
-    flex-direction: column;
+  input {
+    border: 1px solid ${(props) => props.theme["base-button"]};
+    background: ${(props) => props.theme["base-input"]};
+    color: ${(props) => props.theme["base-text"]};
+    padding: 12px;
+    border-radius: 4px;
+
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
   }
 `;
 
@@ -160,30 +172,34 @@ export const OrderSummary = styled.div`
     background: ${(props) => props.theme["base-card"]};
     border-radius: 6px 44px;
     padding: 40px;
-
-    > span {
-      border-bottom: 1px solid ${(props) => props.theme["base-button"]};
-      margin: 24px 0px;
-    }
   }
 `;
 
 export const SummaryItem = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > span {
+    border-bottom: 1px solid ${(props) => props.theme["base-button"]};
+    margin: 24px 0px;
+  }
+`;
+
+export const SummaryCard = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   max-height: 80px;
   padding: 8px 4px;
+  height: 100%;
   > div {
     > div {
       display: flex;
-
       gap: 20px;
     }
   }
 `;
-
 export const ImageContainer = styled.div`
   display: flex;
   height: 100%;

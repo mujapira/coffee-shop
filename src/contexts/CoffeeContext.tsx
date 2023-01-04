@@ -124,6 +124,7 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
     for (let i = 0; i < cartItems.length; i++) {
       value += cartItems[i].price * cartItems[i].quantity!;
     }
+    value.toFixed(2)
     setCartPrice(value);
   }
 
@@ -131,6 +132,7 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
     fetchCoffees();
     getLocalCoffeeList();
     getLocalCart();
+    getCartTotalPrice();
   }, []);
 
   useEffect(() => {

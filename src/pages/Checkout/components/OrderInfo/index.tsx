@@ -1,11 +1,12 @@
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money, Trash } from "phosphor-react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Coffee, CoffeeContext } from "../../../../contexts/CoffeeContext";
 import {
   CardContainer,
   CardWrapper,
   CounterContainer,
   FlagsContainer,
+  FormContainer,
   ImageContainer,
   MiddleContainer,
   OrderInfoContainer,
@@ -14,6 +15,7 @@ import {
   Price,
   PriceContainer,
   Summary,
+  SummaryCard,
   SummaryItem,
   Title,
   Total,
@@ -22,9 +24,16 @@ import {
 import Minus from "../../../../assets/minus.svg";
 import Plus from "../../../../assets/plus.svg";
 
+interface Address {
+  cep: number;
+  city: string;
+  district: string;
+  street: string;
+  number: number;
+  aditional?: string;
+}
 export function OrderInfo() {
   const { cartItems, handleItemCart, coffeeList, cartPrice } = useContext(CoffeeContext);
-
   const deliveryTax = 4;
 
   return (
@@ -43,13 +52,13 @@ export function OrderInfo() {
               </div>
             </div>
 
-            <form action="">
+            <FormContainer>
               <input type="text" name="" id="" />
               <input type="text" name="" id="" />
               <input type="text" name="" id="" />
               <input type="text" name="" id="" />
               <input type="text" name="" id="" />
-            </form>
+            </FormContainer>
           </CardContainer>
         </CardWrapper>
 
@@ -89,8 +98,8 @@ export function OrderInfo() {
             const coffee = coffeeList.find((coffee: Coffee) => coffee.id == item.id)!;
 
             return (
-              <>
-                <SummaryItem>
+              <SummaryItem key={item.id}>
+                <SummaryCard>
                   <ImageContainer>
                     <img src={coffee.image} alt={coffee.image} />
                   </ImageContainer>
@@ -98,16 +107,9 @@ export function OrderInfo() {
                     <span>{coffee.title}</span>
                     <div>
                       <CounterContainer>
-                        {item.quantity === 0 ? (
-                          <span onClick={() => handleItemCart(coffee.id, "minus")}>
-                            <img src={Minus} alt="" />
-                          </span>
-                        ) : (
-                          <span>
-                            <img src={Minus} alt="" />
-                          </span>
-                        )}
-
+                        <span onClick={() => handleItemCart(coffee.id, "minus")}>
+                          <img src={Minus} alt="" />
+                        </span>
                         <span>{item.quantity ?? 0}</span>
                         <span onClick={() => handleItemCart(coffee.id, "plus")}>
                           <img src={Plus} alt="" />
@@ -122,9 +124,9 @@ export function OrderInfo() {
                   <PriceContainer>
                     <b>R${coffee.price}</b>
                   </PriceContainer>
-                </SummaryItem>
+                </SummaryCard>
                 <span />
-              </>
+              </SummaryItem>
             );
           })}
           <Summary>
@@ -139,7 +141,7 @@ export function OrderInfo() {
               </p>
               <Total>
                 <Title>Total</Title>
-                <Price>R$ </Price>
+                <Price>R$ {cartPrice + deliveryTax}</Price>
               </Total>
             </div>
           </Summary>
