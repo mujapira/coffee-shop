@@ -1,12 +1,12 @@
 <h1 align="center">
 <img src="https://user-images.githubusercontent.com/89225210/210851667-138522d8-a194-4072-9de3-a6c76366bc04.png" width="70px"/>
-<img src="https://user-images.githubusercontent.com/89225210/210851667-138522d8-a194-4072-9de3-a6c76366bc04.png" width="70px"/>
-<img src="https://user-images.githubusercontent.com/89225210/210851667-138522d8-a194-4072-9de3-a6c76366bc04.png" width="70px"/>
+<img src="https://user-images.githubusercontent.com/89225210/210877709-818413c9-357f-4307-8b21-ad87c2bfb3d2.png" width="70px"/>
+<img src="https://user-images.githubusercontent.com/89225210/210877837-5fc7fee1-18fa-41c7-af76-c3f5d3fa00a8.png" width="70px"/>
+
 <br/>
 Coffee Shop
 <br/>
 </h1>
-
 <h3> 💻 Principais funcionalidades </h3>
 
 - Listagem de produtos (cafés) disponíveis para compra
@@ -44,7 +44,7 @@ Para iniciá-lo, siga os passos abaixo:
 # Instalar as dependências
 $ yarn install
 # Iniciar o servidor
-$ yarn run dev
+$ yarn run dev:server
 # Iniciar o projeto
 $ yarn run dev
 
@@ -53,7 +53,7 @@ $ yarn run dev
 O app estará disponível no seu browser pelo endereço local http://127.0.0.1:5173/
 
 <h2 align="center">📚Aprendizados</h1>
-- Estados
+Estados
 - ContextAPI
 - LocalStorage
 - Tipagem com TypeScript
@@ -69,3 +69,7 @@ O app estará disponível no seu browser pelo endereço local http://127.0.0.1:5
 
 <p>Acesse o projeto online!</p>
 
+<h2 align="center">🐱‍🏍 Galeria</h1>
+<img src="https://user-images.githubusercontent.com/89225210/210879280-d14116f1-a05c-4f57-825a-6d17ccf5ad50.png" height="" />
+<img src="https://user-images.githubusercontent.com/89225210/210879658-0a34fc63-b10a-4340-8ea8-671cafb76ef0.png" height=""/>
+<img src="https://user-images.githubusercontent.com/89225210/210879991-34d909c2-fcf2-4640-b746-1fe1189f6c91.png" height=""/>
