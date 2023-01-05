@@ -53,7 +53,8 @@ $ yarn run dev
 O app estará disponível no seu browser pelo endereço local http://127.0.0.1:5173/
 
 <h2 align="center">📚Aprendizados</h1>
-Estados
+
+- Estados
 - ContextAPI
 - LocalStorage
 - Tipagem com TypeScript
