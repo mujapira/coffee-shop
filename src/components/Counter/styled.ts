@@ -21,16 +21,22 @@ export const CounterContainer = styled.div`
     font-family: "Poppins", sans-serif;
     font-size: 1.5rem;
     color: ${(props) => props.theme["purple"]};
+    transition: 0.3s;
 
     &:hover {
+      transition: 0.3s;
+
       color: ${(props) => props.theme["purple-dark"]};
     }
 
     svg {
       width: 1rem;
       color: ${(props) => props.theme["purple"]};
+      transition: 0.3s;
+
       &:hover {
         color: ${(props) => props.theme["purple-dark"]};
+        transition: 0.3s;
       }
     }
   }

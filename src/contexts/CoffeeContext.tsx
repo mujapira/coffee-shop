@@ -22,6 +22,8 @@ interface CoffeeContextType {
   cartItems: CartCoffee[];
   handleItemCart: (id: number, operation: string) => void;
   cartPrice: number;
+  setCartItems: React.Dispatch<React.SetStateAction<CartCoffee[]>>;
+  amount: number;
 }
 
 interface CoffeeProviderProps {
@@ -34,6 +36,7 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
   const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
   const [cartItems, setCartItems] = useState<CartCoffee[]>([]);
   const [cartPrice, setCartPrice] = useState(0);
+  const [amount, setAmount] = useState(0);
 
   async function fetchCoffees(query?: string) {
     const response = await api.get("/products", {
@@ -130,11 +133,20 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
     setCartPrice(value);
   }
 
+  function calculate() {
+    let value = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      value += cartItems[i].quantity!;
+    }
+    setAmount(value);
+  }
+  
   useEffect(() => {
     fetchCoffees();
     getLocalCoffeeList();
     getLocalCart();
     getCartTotalPrice();
+    calculate();
   }, []);
 
   useEffect(() => {
@@ -142,8 +154,9 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
     const stateJSON = JSON.stringify(cartItems);
     localStorage.setItem("@ignite:coffee-shop-cart", stateJSON);
     getCartTotalPrice();
+    calculate();
     // console.log(`@ignite:coffee-shop-cart: ${localStorage.getItem("@ignite:coffee-shop-cart")}`);
-  }, [cartItems]);
+  }, [cartItems, setCartItems]);
 
   return (
     <CoffeeContext.Provider
@@ -153,6 +166,8 @@ export function CoffeeProvider({ children }: CoffeeProviderProps) {
         handleItemCart,
         cartItems,
         cartPrice,
+        setCartItems,
+        amount
       }}
     >
       {children}

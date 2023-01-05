@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 
 export const OrderInfoContainer = styled.div`
   max-width: 1440px;
@@ -33,7 +34,7 @@ export const CardContainer = styled.div`
   display: flex;
   gap: 2rem;
 
-  > div {
+  > header {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -65,7 +66,8 @@ export const CardContainer = styled.div`
     }
   }
 `;
-export const FormContainer = styled.form`
+
+export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -77,9 +79,31 @@ export const FormContainer = styled.form`
     padding: 12px;
     border-radius: 4px;
 
+    width: 100%;
+
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
+
+    &:active {
+      border: 1px solid ${(props) => props.theme["yellow-dark"]};
+    }
+    &:focus {
+      border: 1px solid ${(props) => props.theme["yellow-dark"]};
+      box-shadow: none;
+    }
+  }
+  div {
+    display: flex;
+    gap: 12px;
+  }
+
+  .short {
+    max-width: 200px;
+  }
+
+  .super-short {
+    max-width: 60px;
   }
 `;
 
@@ -126,13 +150,14 @@ export const PaymentContainer = styled.div`
   }
 `;
 
-export const FlagsContainer = styled.section`
+export const FlagsContainer = styled(RadioGroup.Root)`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
 
-  > div {
+  > label {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -141,8 +166,14 @@ export const FlagsContainer = styled.section`
     gap: 10px;
     border-radius: 6px;
     background: ${(props) => props.theme["base-button"]};
+    border: 1px solid transparent;
     flex: 1;
     cursor: pointer;
+
+    &.active {
+      border: 1px solid ${(props) => props.theme["purple"]};
+      background: ${(props) => props.theme["purple-light"]};
+    }
 
     svg {
       color: ${(props) => props.theme["purple"]};
@@ -152,6 +183,11 @@ export const FlagsContainer = styled.section`
       color: ${(props) => props.theme["base-text"]};
       font-size: 0.75rem;
       text-transform: uppercase;
+    }
+
+    input {
+      visibility: hidden;
+      position: absolute;
     }
   }
 `;
@@ -226,9 +262,6 @@ export const PriceContainer = styled.div`
   height: 100%;
 `;
 
-
-
-
 export const Summary = styled.div`
   div {
     display: flex;
@@ -238,6 +271,29 @@ export const Summary = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+    button {
+      width: 100%;
+      background-color: ${(props) => props.theme["yellow"]};
+      border: none;
+      border-radius: 6px;
+      padding: 12px 8px;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      color: ${(props) => props.theme["base-white"]};
+      transition: 0.3s;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+
+      &:not(:disabled):hover {
+        transition: 0.3s;
+        background-color: ${(props) => props.theme["yellow-dark"]};
+      }
     }
   }
 `;

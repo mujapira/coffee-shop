@@ -96,9 +96,15 @@ export const AddToCart = styled.button`
   justify-content: center;
   cursor: pointer;
   padding: 8px;
+  transition: 0.3s;
+  &:disabled {
+    
+  }
   &:hover {
     background-color: ${(props) => props.theme["purple"]};
+    transition: 0.3s;
   }
+
   svg {
     color: ${(props) => props.theme["base-card"]};
   }

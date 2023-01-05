@@ -20,7 +20,7 @@ export function Header() {
           <Link to="/checkout">
             <LocationContainer>
               <MapPin size={22} weight="fill" />
-              <span> Itu, SP</span>
+              <span>...</span>
             </LocationContainer>
           </Link>
           <Link to="/checkout">
