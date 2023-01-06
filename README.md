@@ -21,7 +21,6 @@ Coffee Shop
 - <img src="https://user-images.githubusercontent.com/89225210/154761002-389268dc-1404-4e8e-96ed-6f83916ae9ef.png" height="15px"/> React
 - <img src="https://user-images.githubusercontent.com/89225210/154760385-8c7a5ab6-c15e-4dee-b285-d0ca77952d29.png" height="15px"/> TypeScript
 - <img src="https://vitejs.dev/logo.svg" height="15px"/> Vite
-- <img src="https://user-images.githubusercontent.com/89225210/154760385-8c7a5ab6-c15e-4dee-b285-d0ca77952d29.png" height="15px"/> TypeScript
 - <img src="https://user-images.githubusercontent.com/89225210/210874774-79c70b24-4763-4be6-b450-907061c5f5ba.png" height="15px"/> Styled Components
 - <img src="https://user-images.githubusercontent.com/89225210/210875106-7498077d-51ef-4ac0-b7d9-2d56486fdc8a.png" height="15px"/> Zod
 - <img src="https://user-images.githubusercontent.com/89225210/210875298-1c4c7463-d0ac-4a25-9e78-70c54ade6d41.png" height="15px"/> React Hook Form
